@@ -55,6 +55,49 @@ fun main() {
             else println("Массив не симметричен")
         }
         "3" -> {
+            val alphabet = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя".toCharArray()
+            alphabet.shuffle()
+            for (i in 0 ..32) println("[$i] = ${alphabet[i]}")
+            fun cipher(message:String, keyword:String):String {
+                val msg = message.lowercase()
+                var res = ""
+                var i = 0
+                var j = 0
+                while (j < msg.length) {
+                    res += alphabet[(alphabet.indexOf(msg[j]) + alphabet.indexOf(keyword[i])) % (alphabet.size)]
+                    j++
+                    if (i >= keyword.length - 1) i = 0
+                    else i++
+                }
+                return res
+            }
+            fun decipher(message:String, keyword:String):String {
+                val msg = message.lowercase()
+                var res = ""
+                var i = 0
+                var j = 0
+                while (j < msg.length) {
+                    res += alphabet[(alphabet.indexOf(msg[j]) - alphabet.indexOf(keyword[i]) + alphabet.size) % alphabet.size]
+                    j++
+                    if (i >= keyword.length - 1) i = 0
+                    else i++
+                }
+                return res
+            }
+            print("Введите ключевое слово: ")
+            val keyword = readln()
+            print("1 - зашифровать\n2 - расшифровать\nВыберите функцию: ")
+            when (readln()) {
+                "1" -> {
+                    print("Введите слово, которое хотите зашифровать: ")
+                    val cip = cipher(readln(), keyword)
+                    println("Зашифровано как: $cip\nРасшифровка: ${decipher(cip, keyword)}")
+                }
+                "2" -> {
+                    print("Введите шифр: ")
+                    println("Расшифровано как: ${decipher(readln(), keyword)}")
+                }
+            }
         }
         "4" -> {
             print("Введите размерность первого массива: ")
