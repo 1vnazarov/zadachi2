@@ -66,8 +66,7 @@ fun main() {
                 while (j < msg.length) {
                     res += alphabet[(alphabet.indexOf(msg[j]) + alphabet.indexOf(keyword[i])) % (alphabet.size)]
                     j++
-                    if (i >= keyword.length - 1) i = 0
-                    else i++
+                    i = (i + 1) % keyword.length
                 }
                 return res
             }
@@ -79,8 +78,7 @@ fun main() {
                 while (j < msg.length) {
                     res += alphabet[(alphabet.indexOf(msg[j]) - alphabet.indexOf(keyword[i]) + alphabet.size) % alphabet.size]
                     j++
-                    if (i >= keyword.length - 1) i = 0
-                    else i++
+                    i = (i + 1) % keyword.length
                 }
                 return res
             }
